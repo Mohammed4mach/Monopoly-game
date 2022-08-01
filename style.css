@@ -1,0 +1,722 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: default;
+}
+
+*::-moz-selection {
+  color: inherit;
+  background-color: inherit;
+}
+
+*::selection {
+  color: inherit;
+  background-color: inherit;
+}
+
+body {
+  background-color: whitesmoke;
+  font-family: Andalus;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5px;
+}
+
+.board {
+  position: relative;
+  margin-right: 30px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 58px 530px 58px;
+      grid-template-rows: 58px 530px 58px;
+  -ms-grid-columns: 95px 700px 95px;
+      grid-template-columns: 95px 700px 95px;
+}
+
+.player {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #a20;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #fa0;
+  z-index: 1000;
+}
+
+/* Start board grid distribution */
+.top {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / 4;
+}
+
+.left, .center, .right {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 / 3;
+}
+
+.bottom {
+  -ms-grid-row: 3;
+      grid-row-start: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / 4;
+}
+
+/* End board grid distribution */
+/* General Style & Aligning of the board */
+.top, .bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top, .bottom, .left, .right {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.left, .right {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.left {
+  margin-right: 11px;
+}
+
+.right {
+  margin-left: 11px;
+}
+
+.step {
+  width: 80px;
+  height: 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #0009;
+  border-radius: 7px;
+  margin: 2px;
+}
+
+.step:hover {
+  -webkit-animation-name: hover-effect_default;
+          animation-name: hover-effect_default;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  z-index: 100;
+}
+
+.step a {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: inherit;
+  cursor: pointer;
+}
+
+.step a * {
+  cursor: pointer;
+}
+
+.step h4 {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  font-size: 12px;
+  padding: 1px;
+}
+
+.step .step-owner {
+  border-top: 1px solid #0009;
+  height: calc(100% - 18px);
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.step img {
+  width: 89%;
+  height: 89%;
+}
+
+.full-img {
+  border-radius: 0;
+}
+
+.full-img img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Groups Colors  */
+.syria-gp1 h4 {
+  background-color: #ff9900;
+}
+
+.syria-gp2 h4 {
+  background-color: red;
+}
+
+.egypt-gp1 h4 {
+  background-color: yellow;
+}
+
+.egypt-gp2 h4 {
+  background-color: #00cc33;
+}
+
+.emarat-gp1 h4 {
+  background-color: #0000cc;
+  color: gold;
+}
+
+.emarat-gp2 h4 {
+  background-color: #ff3300;
+}
+
+.iraq-gp1 h4 {
+  background-color: cyan;
+}
+
+.iraq-gp2 h4 {
+  background-color: #990066;
+  color: gold;
+}
+
+.forsa h4 {
+  background-image: -webkit-gradient(linear, right top, left top, from(#f00), color-stop(#ff0), to(#f00));
+  background-image: linear-gradient(to left, #f00, #ff0, #f00);
+}
+
+/* Start Top Elements Style */
+.top .step {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.top .step .step-owner {
+  border-top: none;
+  border-bottom: 1px solid #0009;
+}
+
+.top .step h4 {
+  border-radius: 0 0 5px 5px;
+}
+
+.police:hover {
+  -webkit-animation-name: hover-effect_police;
+          animation-name: hover-effect_police;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.15s;
+          animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+/* End Top Element Style  */
+/* Start Center Elements Style */
+.center {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2.5fr 1fr 1fr;
+      grid-template-columns: 2.5fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.buildings {
+  width: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.buildings > img {
+  cursor: pointer;
+  width: 80%;
+  height: 70%;
+}
+
+.buildings h4 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.center .folk-box, .center .forsa-card {
+  width: 200px;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #000a;
+  border-radius: 7px;
+  -webkit-box-shadow: 3px 3px #0009;
+          box-shadow: 3px 3px #0009;
+}
+
+.center .forsa-card {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2 / 4;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3 / 4;
+  -webkit-transform: translate(50%, 50%);
+          transform: translate(50%, 50%);
+  background-color: #08f;
+}
+
+.center .folk-box {
+  margin: 7px 0 0 7px;
+  background-color: #f70;
+}
+
+/* End Center Elements Style */
+/* Start Aside Elements Style */
+.aside {
+  margin-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 0.7fr 1.5fr;
+      grid-template-rows: 1fr 0.7fr 1.5fr;
+  width: 200px;
+}
+
+.aside div {
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.aside .states {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: greenyellow;
+}
+
+.aside > div:not([class="dice"]) {
+  border: 1px solid #0007;
+  border-radius: 7px;
+}
+
+.aside .location-state {
+  height: 280px;
+}
+
+/* End Aside Elements Style */
+/* Animations Start */
+@-webkit-keyframes hover-effect_syria-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 153, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #ff9900;
+            box-shadow: 0 0 20px #ff9900;
+  }
+}
+@keyframes hover-effect_syria-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 153, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #ff9900;
+            box-shadow: 0 0 20px #ff9900;
+  }
+}
+
+.syria-gp1:hover {
+  -webkit-animation-name: hover-effect_syria-gp1;
+          animation-name: hover-effect_syria-gp1;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_syria-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 0, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px red;
+            box-shadow: 0 0 20px red;
+  }
+}
+
+@keyframes hover-effect_syria-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 0, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px red;
+            box-shadow: 0 0 20px red;
+  }
+}
+
+.syria-gp2:hover {
+  -webkit-animation-name: hover-effect_syria-gp2;
+          animation-name: hover-effect_syria-gp2;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_egypt-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 255, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px yellow;
+            box-shadow: 0 0 20px yellow;
+  }
+}
+
+@keyframes hover-effect_egypt-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 255, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px yellow;
+            box-shadow: 0 0 20px yellow;
+  }
+}
+
+.egypt-gp1:hover {
+  -webkit-animation-name: hover-effect_egypt-gp1;
+          animation-name: hover-effect_egypt-gp1;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_egypt-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 204, 51, 0.625);
+            box-shadow: 0 0 10px rgba(0, 204, 51, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #00cc33;
+            box-shadow: 0 0 20px #00cc33;
+  }
+}
+
+@keyframes hover-effect_egypt-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 204, 51, 0.625);
+            box-shadow: 0 0 10px rgba(0, 204, 51, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #00cc33;
+            box-shadow: 0 0 20px #00cc33;
+  }
+}
+
+.egypt-gp2:hover {
+  -webkit-animation-name: hover-effect_egypt-gp2;
+          animation-name: hover-effect_egypt-gp2;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_emarat-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 204, 0.625);
+            box-shadow: 0 0 10px rgba(0, 0, 204, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #0000cc;
+            box-shadow: 0 0 20px #0000cc;
+  }
+}
+
+@keyframes hover-effect_emarat-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 204, 0.625);
+            box-shadow: 0 0 10px rgba(0, 0, 204, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #0000cc;
+            box-shadow: 0 0 20px #0000cc;
+  }
+}
+
+.emarat-gp1:hover {
+  -webkit-animation-name: hover-effect_emarat-gp1;
+          animation-name: hover-effect_emarat-gp1;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_emarat-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 51, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 51, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #ff3300;
+            box-shadow: 0 0 20px #ff3300;
+  }
+}
+
+@keyframes hover-effect_emarat-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(255, 51, 0, 0.625);
+            box-shadow: 0 0 10px rgba(255, 51, 0, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #ff3300;
+            box-shadow: 0 0 20px #ff3300;
+  }
+}
+
+.emarat-gp2:hover {
+  -webkit-animation-name: hover-effect_emarat-gp2;
+          animation-name: hover-effect_emarat-gp2;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_iraq-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 255, 255, 0.625);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px cyan;
+            box-shadow: 0 0 20px cyan;
+  }
+}
+
+@keyframes hover-effect_iraq-gp1 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(0, 255, 255, 0.625);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px cyan;
+            box-shadow: 0 0 20px cyan;
+  }
+}
+
+.iraq-gp1:hover {
+  -webkit-animation-name: hover-effect_iraq-gp1;
+          animation-name: hover-effect_iraq-gp1;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_iraq-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(153, 0, 102, 0.625);
+            box-shadow: 0 0 10px rgba(153, 0, 102, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #990066;
+            box-shadow: 0 0 20px #990066;
+  }
+}
+
+@keyframes hover-effect_iraq-gp2 {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(153, 0, 102, 0.625);
+            box-shadow: 0 0 10px rgba(153, 0, 102, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px #990066;
+            box-shadow: 0 0 20px #990066;
+  }
+}
+
+.iraq-gp2:hover {
+  -webkit-animation-name: hover-effect_iraq-gp2;
+          animation-name: hover-effect_iraq-gp2;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.8s;
+          animation-duration: 0.8s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-effect_default {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(128, 128, 128, 0.625);
+            box-shadow: 0 0 10px rgba(128, 128, 128, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px gray;
+            box-shadow: 0 0 20px gray;
+  }
+}
+
+@keyframes hover-effect_default {
+  0% {
+    -webkit-box-shadow: 0 0 10px rgba(128, 128, 128, 0.625);
+            box-shadow: 0 0 10px rgba(128, 128, 128, 0.625);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 20px gray;
+            box-shadow: 0 0 20px gray;
+  }
+}
+
+@-webkit-keyframes hover-effect_police {
+  0% {
+    -webkit-box-shadow: 0 0 20px rgba(255, 0, 0, 0.625);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.625);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 255, 0.625);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.625);
+  }
+}
+
+@keyframes hover-effect_police {
+  0% {
+    -webkit-box-shadow: 0 0 20px rgba(255, 0, 0, 0.625);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.625);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 255, 0.625);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.625);
+  }
+}
+
+/* Animations End */
+/*# sourceMappingURL=style.css.map */

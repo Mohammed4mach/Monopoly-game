@@ -1,0 +1,324 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+}
+*::selection {
+    color: inherit;
+    background-color: inherit;
+}
+
+body {
+    background-color: whitesmoke;
+    font-family: Andalus;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.board {
+    position: relative;
+    margin-right: 30px;
+    display: grid;
+    grid-template-rows: 58px 530px 58px;
+    grid-template-columns: 95px 700px 95px;
+}
+
+.player {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #a20;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #fa0;
+    z-index: 1000;
+}
+
+/* Start board grid distribution */
+.top {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+}
+.left, .center, .right {
+    grid-row: 2 / 3;
+}
+.bottom {
+    grid-row-start: 3;
+    grid-column: 1 / 4
+}
+/* End board grid distribution */
+
+/* General Style & Aligning of the board */
+.top, .bottom {
+    display: flex;
+}
+.top, .bottom, .left, .right {
+    justify-content: center;
+}
+.left, .right {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.left {
+    margin-right: 11px;
+}
+.right {
+    margin-left: 11px;
+}
+
+.step {
+    width: 80px;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #0009;
+    border-radius: 7px;
+    margin: 2px;
+
+    &:hover {
+        animation: {
+            name: hover-effect_default;
+            iteration-count: infinite;
+            duration: 0.8s;
+            timing-function: linear;
+            direction: alternate;
+        }
+        z-index: 100
+    }
+
+    a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: inherit;
+        cursor: pointer;
+        * { cursor: pointer }
+    }
+
+    h4 {
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        font-size: 12px;
+        padding: 1px;
+    }
+
+    .step-owner {
+        border-top: 1px solid #0009;
+        height: calc(100% - 18px);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        width: 89%;
+        height: 89%
+    }
+}
+
+.full-img {
+    border-radius: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Groups Colors  */
+.syria-gp1 { h4 { background-color: rgb(255, 153,0) } }
+.syria-gp2 { h4 { background-color: rgb(255, 0, 0) } }
+.egypt-gp1 { h4 { background-color: rgb(255, 255, 0) } }
+.egypt-gp2 { h4 { background-color: rgb(0, 204, 51) } }
+.emarat-gp1 { 
+    h4 {
+        background-color: rgb(0, 0, 204);
+        color: gold;
+    }
+}
+.emarat-gp2 { h4 { background-color: rgb(255, 51, 0) } }
+.iraq-gp1 { h4 { background-color: rgb(0, 255, 255) } }
+.iraq-gp2 {
+    h4 {
+        background-color: rgb(153, 0, 102);
+        color: gold;
+    }
+}
+.forsa {
+    h4 {
+        background-image: linear-gradient(to left ,#f00, #ff0, #f00)
+    }
+}
+
+/* Start Top Elements Style */
+.top .step {
+    flex-direction: column-reverse;
+
+    .step-owner {
+        border-top: none;
+        border-bottom: 1px solid #0009;
+    }
+
+    h4 { border-radius: 0 0 5px 5px }
+}
+.police {
+    &:hover {
+    animation: {
+        name: hover-effect_police;
+        iteration-count: infinite;
+        duration: 0.15s;
+        timing-function: linear;
+        direction: alternate;
+    }
+}
+}
+/* End Top Element Style  */
+
+/* Start Center Elements Style */
+.center {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
+}
+.buildings {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+        cursor: pointer;
+        width: 80%;
+        height: 70%;
+    }
+
+    h4 {
+        align-self: center;
+    }
+}
+.center{ 
+    .folk-box, .forsa-card {
+        width: 200px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #000a;
+        border-radius: 7px;
+        box-shadow: 3px 3px #0009
+    }
+
+    .forsa-card {
+        grid-column: 2 / 4;
+        grid-row: 3 / 4;
+        transform: translate(50%, 50%);
+        background-color: #08f
+    }
+
+    .folk-box {
+        margin: 7px 0 0 7px;
+        background-color: #f70;
+    }
+}
+/* End Center Elements Style */
+
+
+/* Start Aside Elements Style */
+.aside {
+    margin-top: 20px;
+    display: grid;
+    grid-template-rows: 1fr 0.7fr 1.5fr;
+    width: 200px;
+
+    div {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center
+    }
+
+    .states {
+        justify-content: space-around;
+        align-items: flex-start;
+        background-color: greenyellow;
+    }
+
+    > div:not([class="dice"]) {
+        border: 1px solid #0007;
+        border-radius: 7px;
+    }
+
+    .location-state {
+        height: 280px;
+    }
+}
+/* End Aside Elements Style */
+
+/* Animations Start */
+// Map of group-color pairs
+$gp-color: 
+(   syria-gp1: rgb(255, 153,0), syria-gp2: rgb(255, 0, 0),
+    egypt-gp1: rgb(255, 255, 0), egypt-gp2: rgb(0, 204, 51),
+    emarat-gp1: rgb(0, 0, 204), emarat-gp2: rgb(255, 51, 0),
+    iraq-gp1: rgb(0, 255, 255), iraq-gp2: rgb(153, 0, 102)
+);
+
+@each $group, $color in $gp-color {
+    // Designing Animations
+    @keyframes hover-effect_#{$group} {
+        0% {
+            box-shadow: 0 0 10px rgba($color, 0.625);
+        }
+        50%{
+            box-shadow: 0 0 20px rgba($color, 1);
+        }
+    }
+
+    // Add to Classes
+    .#{$group} {
+        &:hover {
+            animation: {
+                name: hover-effect_#{$group};
+                iteration-count: infinite;
+                duration: 0.8s;
+                timing-function: linear;
+                direction: alternate;
+            }
+        }
+    }
+}
+
+@keyframes hover-effect_default {
+    0% {
+        box-shadow: 0 0 10px rgba(gray, 0.625);
+    }
+    50%{
+        box-shadow: 0 0 20px gray;
+    }
+}
+
+@keyframes hover-effect_police {
+    0% {
+        box-shadow: 0 0 20px rgba(#f00, 0.625);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(#00f, 0.625);
+    }
+}
+
+/* Animations End */
